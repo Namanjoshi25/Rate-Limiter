@@ -1,0 +1,57 @@
+# ==========================================
+# 1. PYTHON VIRTUAL ENVIRONMENTS
+# ==========================================
+.venv/
+venv/
+ENV/
+env/
+# Legacy environment configurations
+bin/
+lib/
+include/
+share/
+
+# ==========================================
+# 2. RUNTIME AND CACHE UTILITIES
+# ==========================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ==========================================
+# 3. ENVIRONMENT SECRETS & CREDENTIALS
+# ==========================================
+# Crucial: Never commit your production API keys or DB passwords!
+.env
+.env.[a-zA-Z]*
+!.env.example
+*.pem
+*.key
+certs/
+
+# ==========================================
+# 4. DATABASE & SYSTEM STATE LOCAL LOGS
+# ==========================================
+*.log
+logs/
+# SQLite local databases
+*.db
+*.sqlite3
+# Local Redis dump files (useful for Phase 2)
+dump.rdb
+
+# ==========================================
+# 5. CONTAINER & SYSTEM OPERATIONAL FILES
+# ==========================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
