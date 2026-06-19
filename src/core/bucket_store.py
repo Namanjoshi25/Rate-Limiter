@@ -1,10 +1,10 @@
 from typing import Callable
 from .algorithm import TokenBucket
 import threading
-
+from ..util.base_store import BaseStore
 BucketFactory = Callable[[],TokenBucket]
 
-class BucketStore:
+class BucketStore(BaseStore):
     def __init__(self,factory:BucketFactory):
         self._factory = factory
         self._buckets: dict[str, TokenBucket] = {}
@@ -23,4 +23,8 @@ class BucketStore:
         return len(self._buckets)
     def keys(self)->str:
         with self._lock:
-            return list(self._buckets.keys())        
+            return list(self._buckets.keys())  
+
+    async def consume(self, key: str, capacity: int, refill_rate: float, cost: int = 1):
+        bucket = self.get_or_create(key)
+        return await bucket.consume(cost=cost)

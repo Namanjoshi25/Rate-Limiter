@@ -29,6 +29,7 @@ htmlcov/
 # ==========================================
 # Crucial: Never commit your production API keys or DB passwords!
 .env
+src/.env
 .env.[a-zA-Z]*
 !.env.example
 *.pem
@@ -55,3 +56,8 @@ Thumbs.db
 .vscode/
 *.sublime-project
 *.sublime-workspace
+
+
+.lua
+/.lua
+/src/scripts/.lua

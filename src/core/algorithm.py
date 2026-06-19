@@ -35,7 +35,7 @@ class TokenBucket:
             retry = (cost - self._tokens)/self.refill_rate if not allowed else 0.0
             return RateLimitResult(allowed,remaining,round(retry,3),self.capacity)      
 
-    def consume(self,cost:int =1)->RateLimitResult:
+    async def consume(self,cost:int =1)->RateLimitResult:
         with self._lock:
             self._refill()
             if self._tokens >= cost:
@@ -44,4 +44,4 @@ class TokenBucket:
                 return RateLimitResult(True,remaining,0.0,self.capacity)     
             else:
                 retry = round((cost- self._tokens)/self.refill_rate,3)
-                return RateLimitResult(False,self._tokens,retry,self.capacity)  
+                return RateLimitResult(False, max(0, int(self._tokens)), retry, self.capacity)  

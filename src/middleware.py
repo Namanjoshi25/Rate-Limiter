@@ -10,7 +10,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self._limiter = limiter
 
     async def dispatch(self, request: Request, call_next):
-        result = self._limiter.check_request(request)
+        result = await self._limiter.check_request(request)
         if not result.allowed:
             return JSONResponse(
                 status_code=429,
