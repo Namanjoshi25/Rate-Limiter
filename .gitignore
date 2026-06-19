@@ -58,6 +58,3 @@ Thumbs.db
 *.sublime-workspace
 
 
-.lua
-/.lua
-/src/scripts/.lua
