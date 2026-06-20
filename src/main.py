@@ -1,18 +1,48 @@
 from fastapi import FastAPI
-from .core.algorithm import TokenBucket
-from .core.bucket_store import BucketStore
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import Optional
 from .core.extractor import IPKeyExtractor
+from .core.connection import get_redis_client
 from .limiter import RateLimiter
 from .middleware import RateLimitMiddleware
 from .models.rate_limit import RateLimitConfig
+from .store.redis import RedisStore
 from .core.config import settings
+
 app = FastAPI()
 
 config = RateLimitConfig(capacity=settings.capacity, refill_rate=settings.refill_rate)
-store = BucketStore(factory=lambda: TokenBucket(capacity=settings.capacity, refill_rate=settings.refill_rate))
-limiter = RateLimiter(store=store, extractor=IPKeyExtractor(),config=config)
+store = RedisStore(redis=get_redis_client())
+limiter = RateLimiter(store=store, extractor=IPKeyExtractor(), config=config)
 
 app.add_middleware(RateLimitMiddleware, limiter=limiter)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["X-RateLimit-Limit", "X-RateLimit-Remaining", "Retry-After"],
+)
+
+
+class ConfigUpdate(BaseModel):
+    capacity: Optional[int] = None
+    refill_rate: Optional[float] = None
+
+
+@app.get("/config")
+async def get_config():
+    return {"capacity": config.capacity, "refill_rate": config.refill_rate}
+
+
+@app.patch("/config")
+async def update_config(body: ConfigUpdate):
+    if body.capacity is not None:
+        config.capacity = body.capacity
+    if body.refill_rate is not None:
+        config.refill_rate = body.refill_rate
+    return {"capacity": config.capacity, "refill_rate": config.refill_rate}
 
 
 @app.get("/")

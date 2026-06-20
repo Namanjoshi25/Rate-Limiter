@@ -9,7 +9,11 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         super().__init__(app)
         self._limiter = limiter
 
+    _SKIP = frozenset({"/config", "/docs", "/redoc", "/openapi.json"})
+
     async def dispatch(self, request: Request, call_next):
+        if request.url.path in self._SKIP:
+            return await call_next(request)
         result = await self._limiter.check_request(request)
         if not result.allowed:
             return JSONResponse(

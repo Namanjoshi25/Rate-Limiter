@@ -23,16 +23,15 @@ class RedisStore(BaseStore):
     ) -> RateLimitResult:
         now = time.time()
         result = await self._script(
-            key = [key],
-            args=[capacity,refill_rate,cost,now]
-
+            keys=[key],
+            args=[capacity, refill_rate, cost, now],
         )
-        allowed,remaining ,retry_after= result
+        allowed, remaining, retry_after = result
         return RateLimitResult(
-            allowed=allowed,
+            allowed=bool(allowed),
             remaining=int(remaining),
-            retry_after=round(retry_after,3),
-            limit=capacity
+            retry_after=round(float(retry_after), 3),
+            limit=capacity,
         )
     async def warmup(self)->None:
         await self._script.register()

@@ -1,24 +1,21 @@
-from pydantic_settings import BaseSettings
-from pydantic import Field
-
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field, AliasChoices
 
 
 class AppConfig(BaseSettings):
-    redis_url:        str   = Field("redis://localhost:6379", env="REDIS_URL")
-    redis_max_conns:  int   = Field(20,                      env="REDIS_MAX_CONNECTIONS")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        populate_by_name=True,
+    )
 
-    # Rate limit defaults
-    capacity:         int   = Field(100,                     env="RATE_LIMIT_CAPACITY")
-    refill_rate:      float = Field(10.0,                    env="RATE_LIMIT_REFILL_RATE")
-
-    # App
-    environment:      str   = Field("development",           env="ENVIRONMENT")
-    debug:            bool  = Field(False,                   env="DEBUG")
-
-    class Config:
-        env_file         = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive   = False
+    redis_url:       str   = Field("redis://localhost:6379")
+    redis_max_conns: int   = Field(20,    validation_alias=AliasChoices("redis_max_conns", "REDIS_MAX_CONNECTIONS"))
+    capacity:        int   = Field(10,   validation_alias=AliasChoices("capacity", "RATE_LIMIT_CAPACITY"))
+    refill_rate:     float = Field(0.33,  validation_alias=AliasChoices("refill_rate", "RATE_LIMIT_REFILL_RATE"))
+    environment:     str   = Field("development")
+    debug:           bool  = Field(False)
 
 
 settings = AppConfig()

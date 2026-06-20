@@ -48,7 +48,16 @@ logs/
 dump.rdb
 
 # ==========================================
-# 5. CONTAINER & SYSTEM OPERATIONAL FILES
+# 5. NODE / FRONTEND
+# ==========================================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env
+frontend/.env.local
+
+# ==========================================
+# 6. CONTAINER & SYSTEM OPERATIONAL FILES
 # ==========================================
 .DS_Store
 Thumbs.db
@@ -56,5 +65,4 @@ Thumbs.db
 .vscode/
 *.sublime-project
 *.sublime-workspace
-
 

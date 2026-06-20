@@ -23,5 +23,5 @@ else
     local retry_after = (cost - tokens) / refill_rate
     redis.call('HMSET', key, 'tokens', tokens, 'last_refill', now)
     redis.call('EXPIRE', key, math.ceil(capacity / refill_rate) + 60)
-    return {0, 0, retry_after}
+    return {0, 0, tostring(retry_after)}
 end
