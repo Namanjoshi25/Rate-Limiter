@@ -1,20 +1,29 @@
 import { useState } from 'react'
 
-export default function BurstPanel({ status, isBursting, onFire, onBurst, onStop }) {
+export default function BurstPanel({ status, isBursting, onFire, onBurst, onStop, burstProgress }) {
   const [burstCount, setBurstCount] = useState(30)
+  const pct = burstProgress.total > 0 ? (burstProgress.current / burstProgress.total) * 100 : 0
 
   return (
-    <div className="burst-panel">
-      <h3 className="panel-title">🚀 Controls</h3>
+    <div className="panel luxe-glass">
+      <div className="panel-head">
+        <div className="panel-icon">RQ</div>
+        <span className="panel-title">Controls</span>
+      </div>
 
-      <button className="btn-fire" onClick={onFire} disabled={isBursting}>
-        ⚡ Fire Single Request
+      <button
+        className="btn btn-ghost"
+        onClick={onFire}
+        disabled={isBursting}
+        style={{ marginBottom: 'var(--space-4)' }}
+      >
+        fire single request
       </button>
 
-      <div className="burst-config">
-        <div className="slider-header">
-          <label>Burst Count</label>
-          <span className="slider-value">{burstCount} requests</span>
+      <div className="slider-group" style={{ marginBottom: 'var(--space-3)' }}>
+        <div className="slider-row">
+          <span className="slider-lbl">Burst Count</span>
+          <span className="slider-val">{burstCount}</span>
         </div>
         <input
           type="range" min="5" max="100" value={burstCount}
@@ -24,42 +33,37 @@ export default function BurstPanel({ status, isBursting, onFire, onBurst, onStop
       </div>
 
       {isBursting ? (
-        <button className="btn-stop" onClick={onStop}>■ Stop Burst</button>
+        <>
+          <div className="burst-progress">
+            <div className="burst-bar">
+              <div className="burst-bar-fill" style={{ width: `${pct}%` }} />
+            </div>
+            <div className="burst-bar-labels">
+              <span>{burstProgress.current} / {burstProgress.total}</span>
+              <span>{Math.round(pct)}%</span>
+            </div>
+          </div>
+          <button className="btn btn-stop" onClick={onStop}>stop burst</button>
+        </>
       ) : (
-        <button className="btn-burst" onClick={() => onBurst(burstCount)}>
-          🚀 Auto Burst ({burstCount} requests)
+        <button className="btn btn-burst" onClick={() => onBurst(burstCount)}>
+          burst {burstCount} requests
         </button>
       )}
 
       {status && (
-        <div className={`status-card ${status.allowed === false ? 'blocked' : status.allowed ? 'allowed' : ''}`}>
-          {status.error ? (
-            <>
-              <span className="status-icon">⚠️</span>
-              <div>
-                <div className="status-title">Connection Error</div>
-                <div className="status-detail">{status.message}</div>
-              </div>
-            </>
-          ) : status.allowed ? (
-            <>
-              <span className="status-icon">✅</span>
-              <div>
-                <div className="status-title">Request Allowed</div>
-                <div className="status-detail">{status.remaining} tokens remaining</div>
-              </div>
-            </>
-          ) : (
-            <>
-              <span className="status-icon">🚫</span>
-              <div>
-                <div className="status-title">Rate Limited (429)</div>
-                <div className="status-detail">
-                  Retry after {status.retryAfter?.toFixed(2)}s
-                </div>
-              </div>
-            </>
-          )}
+        <div className={`status-badge${status.allowed === false ? ' sb-limit' : status.allowed ? ' sb-ok' : ''}`}>
+          <div className="status-dot" />
+          <span className="status-code">
+            {status.error ? 'ERR' : status.allowed ? '200' : '429'}
+          </span>
+          <span className="status-msg">
+            {status.error
+              ? 'Cannot reach backend'
+              : status.allowed
+                ? `${status.remaining} tokens remaining`
+                : `Retry in ${status.retryAfter?.toFixed(2)}s`}
+          </span>
         </div>
       )}
     </div>
