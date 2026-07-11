@@ -6,16 +6,19 @@ from typing import Optional
 
 
 class RateLimitMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app, limiter: Optional[RateLimiter]):
+    def __init__(self, app):
         super().__init__(app)
-        self._limiter = limiter
+        
 
     _SKIP = frozenset({"/config", "/docs", "/redoc", "/openapi.json"})
 
     async def dispatch(self, request: Request, call_next):
+        limiter = getattr(request.app.state,"limiter",None)
+        if limiter is None:
+            return await call_next(request)
         if request.url.path in self._SKIP:
             return await call_next(request)
-        result = await self._limiter.check_request(request)
+        result = await limiter.check_request(request)
         if not result.allowed:
             return JSONResponse(
                 status_code=429,
