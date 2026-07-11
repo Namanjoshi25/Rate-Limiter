@@ -9,14 +9,22 @@ from .middleware import RateLimitMiddleware
 from .models.rate_limit import RateLimitConfig
 from .store.redis import RedisStore
 from .core.config import settings
-
-app = FastAPI()
+from contextlib import asynccontextmanager
 
 config = RateLimitConfig(capacity=settings.capacity, refill_rate=settings.refill_rate)
-store = RedisStore(redis=get_redis_client())
-limiter = RateLimiter(store=store, extractor=IPKeyExtractor(), config=config)
+@asynccontextmanager
+async def lifespan(app:FastAPI):
+    client = get_redis_client()
+    store = RedisStore(client)
+    limiter = RateLimiter(store=store, extractor=IPKeyExtractor(), config=config)
+    app.state.limiter = limiter
+    yield
 
-app.add_middleware(RateLimitMiddleware, limiter=limiter)
+
+
+app = FastAPI(lifespan=lifespan)
+
+app.add_middleware(RateLimitMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://localhost:3000"],

@@ -2,10 +2,11 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 from .limiter import RateLimiter
+from typing import Optional
 
 
 class RateLimitMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app, limiter: RateLimiter):
+    def __init__(self, app, limiter: Optional[RateLimiter]):
         super().__init__(app)
         self._limiter = limiter
 
