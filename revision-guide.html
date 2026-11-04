@@ -119,7 +119,7 @@
       border-radius: var(--radius-full);
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
       margin-top: 16px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
     .brand {
       display: flex;
@@ -175,8 +175,8 @@
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 30px 0 50px;
-      max-width: 900px;
+      padding: 20px 0 40px;
+      max-width: 920px;
       margin: 0 auto;
     }
     .hero-badge {
@@ -191,7 +191,7 @@
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.02em;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       box-shadow: 0 0 24px rgba(99, 102, 241, 0.15);
     }
     .hero-badge .dot {
@@ -207,11 +207,11 @@
       50% { opacity: 0.4; transform: scale(0.8); }
     }
     .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.3rem, 4.5vw, 3.8rem);
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.1;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -222,11 +222,11 @@
       -webkit-text-fill-color: transparent;
     }
     .hero p {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       color: var(--text-muted);
       line-height: 1.6;
-      max-width: 760px;
-      margin: 0 auto 32px;
+      max-width: 800px;
+      margin: 0 auto 28px;
     }
     
     /* Stats Bar */
@@ -234,14 +234,14 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 50px;
+      gap: 14px;
+      margin-bottom: 40px;
     }
     .stat-pill {
       background: rgba(22, 28, 46, 0.6);
       border: 1px solid var(--border);
       border-radius: var(--radius-full);
-      padding: 8px 20px;
+      padding: 7px 18px;
       font-size: 13px;
       font-weight: 600;
       display: flex;
@@ -647,6 +647,229 @@
       color: var(--text-sub);
     }
 
+    /* ============================================================== */
+    /* NEW: GUIDED TRACK / START HERE STYLES */
+    /* ============================================================== */
+    .track-hero-box {
+      background: linear-gradient(135deg, rgba(30, 41, 69, 0.7), rgba(15, 20, 34, 0.9));
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .track-hero-box::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 70%);
+      pointer-events: none;
+    }
+    .track-progress-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .track-progress-bar-bg {
+      height: 10px;
+      background: #090d18;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .track-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #6366f1, #38bdf8, #10b981);
+      width: 0%;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .track-progress-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-sub);
+    }
+
+    .track-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .track-step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .track-step-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.5);
+    }
+    .track-step-card.completed {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.04), rgba(15, 20, 34, 0.8));
+    }
+    .track-step-card.completed .step-number-pill {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+    }
+
+    .track-step-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .step-identity {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .step-number-pill {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #1e2640;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #93c5fd;
+      font-weight: 800;
+      font-size: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .step-heading {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .step-check-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .step-check-label:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+    .step-checkbox {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--text-sub);
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .step-checkbox:checked {
+      background: #10b981;
+      border-color: #10b981;
+    }
+    .step-checkbox:checked::after {
+      content: '✓';
+      position: absolute;
+      top: -2px;
+      left: 2px;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .step-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .step-block {
+      background: #070a12;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .step-block-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .step-block-content {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Command Runner Box */
+    .cmd-snippet-box {
+      background: #05070e;
+      border: 1px solid #1a2238;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #7dd3fc;
+      margin-top: 4px;
+    }
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
     /* Tab Switching Animations */
     .tab-section {
       display: none;
@@ -686,7 +909,8 @@
         <span>Gateway Architecture</span>
       </div>
       <nav class="nav-links">
-        <button class="nav-tab-btn active" onclick="switchSection('sec-overview', this)">✨ System Map</button>
+        <button class="nav-tab-btn active" onclick="switchSection('sec-track', this)">🧭 Start Here (Guided Track)</button>
+        <button class="nav-tab-btn" onclick="switchSection('sec-overview', this)">✨ System Map</button>
         <button class="nav-tab-btn" onclick="switchSection('sec-limiter', this)">🛡️ Rate Limiter</button>
         <button class="nav-tab-btn" onclick="switchSection('sec-cache', this)">⚡ Mutex Cache & SWR</button>
         <button class="nav-tab-btn" onclick="switchSection('sec-queue', this)">📬 Task Queue</button>
@@ -728,9 +952,349 @@
     </section>
 
     <!-- ============================================================== -->
+    <!-- SECTION: GUIDED TRACK (START HERE & FOLLOW-THROUGH) -->
+    <!-- ============================================================== -->
+    <main id="sec-track" class="tab-section active">
+      
+      <!-- Progress Bar & Track Overview -->
+      <div class="track-hero-box">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div class="bento-tag tag-emerald" style="margin-bottom: 8px;">Guiding Tour</div>
+            <h2 style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; color: #f8fafc;">
+              Step-by-Step Revision &amp; Execution Roadmap
+            </h2>
+            <p style="font-size: 14px; color: var(--text-muted); max-width: 780px;">
+              Don't know where to start? Follow these <strong>6 sequential milestones</strong> in order. Each step gives you the exact mental model, the file to read, the terminal command to run, and how it connects to the next topic.
+            </p>
+          </div>
+          <button class="btn-action btn-action-primary" onclick="resetTrackProgress()">🔄 Reset Checklist</button>
+        </div>
+
+        <div class="track-progress-wrapper">
+          <div class="track-progress-stats">
+            <span id="track-completed-count">0 / 6 Milestones Completed (0%)</span>
+            <span>Saved Automatically in Browser</span>
+          </div>
+          <div class="track-progress-bar-bg">
+            <div id="track-progress-bar" class="track-progress-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step Cards List -->
+      <div class="track-steps-list">
+        
+        <!-- STEP 1 -->
+        <div class="track-step-card" id="step-card-1">
+          <div class="track-step-top">
+            <div class="step-identity">
+              <div class="step-number-pill">01</div>
+              <div>
+                <div class="step-heading">
+                  Boot the Redis Course Lab &amp; Verify CLI
+                  <span class="bento-tag tag-cyan" style="margin:0;">Environment Setup</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted);">
+                  The lab uses Redis 8 on port 6380 so it never collides with standard Redis or local background services.
+                </div>
+              </div>
+            </div>
+            <label class="step-check-label">
+              <input type="checkbox" class="step-checkbox" id="chk-step-1" onchange="toggleStep(1)">
+              Mark Step 1 Done
+            </label>
+          </div>
+
+          <div class="step-details-grid">
+            <div class="step-block">
+              <div class="step-block-title">🧠 1. The Mental Model</div>
+              <div class="step-block-content">
+                Redis runs as an in-memory, single-threaded event loop. Every command runs to completion atomically. Port 6380 is our designated isolated course sandbox.
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">💻 2. Commands to Execute</div>
+              <div class="step-block-content">
+                Launch the container and test connection with <code>PING</code>:
+                <div class="cmd-snippet-box">
+                  <span>docker run -d --name redis-course -p 6380:6379 redis:8-alpine</span>
+                  <button class="copy-btn" onclick="copyCmd('docker run -d --name redis-course -p 6380:6379 redis:8-alpine', this)">Copy</button>
+                </div>
+                <div class="cmd-snippet-box">
+                  <span>docker exec -it redis-course redis-cli -p 6379 ping</span>
+                  <button class="copy-btn" onclick="copyCmd('docker exec -it redis-course redis-cli -p 6379 ping', this)">Copy</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">🔍 3. Expected Verification</div>
+              <div class="step-block-content">
+                <code>redis-cli</code> prints <code>PONG</code>. You are now connected to the isolated Redis sandbox engine.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="track-step-card" id="step-card-2">
+          <div class="track-step-top">
+            <div class="step-identity">
+              <div class="step-number-pill">02</div>
+              <div>
+                <div class="step-heading">
+                  Revise the Token Bucket &amp; Lua Script Engine
+                  <span class="bento-tag tag-rose" style="margin:0;">Rate Limiter</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted);">
+                  Understand why mathematical refill inside Lua beats sliding windows and eliminates Python race conditions.
+                </div>
+              </div>
+            </div>
+            <label class="step-check-label">
+              <input type="checkbox" class="step-checkbox" id="chk-step-2" onchange="toggleStep(2)">
+              Mark Step 2 Done
+            </label>
+          </div>
+
+          <div class="step-details-grid">
+            <div class="step-block">
+              <div class="step-block-title">📂 1. Files to Inspect</div>
+              <div class="step-block-content">
+                &bull; <a href="file:///E:/Coding/rate-limiter/src/scripts/token_bucket.lua" style="color: #93c5fd; font-family: monospace;">src/scripts/token_bucket.lua</a> (27 lines)<br>
+                &bull; <a href="file:///E:/Coding/rate-limiter/src/middleware.py" style="color: #93c5fd; font-family: monospace;">src/middleware.py</a> (HTTP headers & 429 response)
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">🧠 2. Core Takeaway</div>
+              <div class="step-block-content">
+                Store only 2 keys in a Redis Hash: <code>tokens</code> and <code>last_refill</code>. When a request hits, compute <code>now - last_refill</code> and add <code>elapsed * refill_rate</code> capped at capacity. Deduct cost atomically in Lua.
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">⚠️ 3. Interview Trap to Remember</div>
+              <div class="step-block-content">
+                If you do this in Python (Read &rarr; Compute &rarr; Write), two workers reading at the same millisecond overwrite each other, causing double allowance. <strong>Lua makes it 100% atomic.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="track-step-card" id="step-card-3">
+          <div class="track-step-top">
+            <div class="step-identity">
+              <div class="step-number-pill">03</div>
+              <div>
+                <div class="step-heading">
+                  Revise the Stampede-Proof Mutex Cache (with SWR)
+                  <span class="bento-tag tag-cyan" style="margin:0;">Caching &amp; SWR</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted);">
+                  Shield databases from Thundering Herds (Mutex), Avalanches (Jitter), and Penetration (Negative Caching).
+                </div>
+              </div>
+            </div>
+            <label class="step-check-label">
+              <input type="checkbox" class="step-checkbox" id="chk-step-3" onchange="toggleStep(3)">
+              Mark Step 3 Done
+            </label>
+          </div>
+
+          <div class="step-details-grid">
+            <div class="step-block">
+              <div class="step-block-title">📂 1. Files to Inspect</div>
+              <div class="step-block-content">
+                &bull; <a href="file:///E:/Coding/rate-limiter/src/cache/mutex_cache.py" style="color: #93c5fd; font-family: monospace;">src/cache/mutex_cache.py</a> (Mutex, SWR & Lua Unlock)<br>
+                &bull; <a href="file:///E:/Coding/rate-limiter/src/tests/test_mutex_cache.py" style="color: #93c5fd; font-family: monospace;">src/tests/test_mutex_cache.py</a> (50-task concurrency test)
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">💻 2. Command to Run Concurrency Test</div>
+              <div class="step-block-content">
+                Make sure Redis is running, then run the concurrency proof:
+                <div class="cmd-snippet-box">
+                  <span>&amp; ".venv\Scripts\python.exe" "src/tests/test_mutex_cache.py"</span>
+                  <button class="copy-btn" onclick="copyCmd('&amp; \".venv\\Scripts\\python.exe\" \"src/tests/test_mutex_cache.py\"', this)">Copy</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">🔍 3. What to Observe</div>
+              <div class="step-block-content">
+                50 concurrent coroutines request the same item. All 50 succeed, but the database call counter prints: <strong>DB queries executed: 1</strong>. Followed by negative caching proving non-existent keys are queried exactly once.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="track-step-card" id="step-card-4">
+          <div class="track-step-top">
+            <div class="step-identity">
+              <div class="step-number-pill">04</div>
+              <div>
+                <div class="step-heading">
+                  Revise the Decoupled Background Task Queue
+                  <span class="bento-tag tag-purple" style="margin:0;">Async Job Pipeline</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted);">
+                  Sub-2ms write ingestion (202 Accepted) using Redis Hash state machines and non-blocking BRPOP workers.
+                </div>
+              </div>
+            </div>
+            <label class="step-check-label">
+              <input type="checkbox" class="step-checkbox" id="chk-step-4" onchange="toggleStep(4)">
+              Mark Step 4 Done
+            </label>
+          </div>
+
+          <div class="step-details-grid">
+            <div class="step-block">
+              <div class="step-block-title">📂 1. Files to Inspect</div>
+              <div class="step-block-content">
+                &bull; <a href="file:///E:/Coding/rate-limiter/src/queue/job_dispatcher.py" style="color: #93c5fd; font-family: monospace;">src/queue/job_dispatcher.py</a> (Producer: LPUSH + HSET)<br>
+                &bull; <a href="file:///E:/Coding/rate-limiter/src/queue/worker.py" style="color: #93c5fd; font-family: monospace;">src/queue/worker.py</a> (Consumer: BRPOP & State Transitions)
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">💻 2. Command to Run Queue Tests</div>
+              <div class="step-block-content">
+                Run the end-to-end task queue suite:
+                <div class="cmd-snippet-box">
+                  <span>&amp; ".venv\Scripts\python.exe" "src/tests/test_job_queue.py"</span>
+                  <button class="copy-btn" onclick="copyCmd('&amp; \".venv\\Scripts\\python.exe\" \"src/tests/test_job_queue.py\"', this)">Copy</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">🛡️ 3. Failure Mode Isolation</div>
+              <div class="step-block-content">
+                The test triggers an unhandled exception in a worker handler. Notice the worker <strong>does not crash</strong>: it records the error in the job's Redis Hash, sets <code>status: failed</code>, and processes the next task.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="track-step-card" id="step-card-5">
+          <div class="track-step-top">
+            <div class="step-identity">
+              <div class="step-number-pill">05</div>
+              <div>
+                <div class="step-heading">
+                  Run the Unified Gateway &amp; React Dashboard
+                  <span class="bento-tag tag-violet" style="margin:0;">Integration</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted);">
+                  Wire everything together via FastAPI lifespan and visualize token drain/refill in the browser.
+                </div>
+              </div>
+            </div>
+            <label class="step-check-label">
+              <input type="checkbox" class="step-checkbox" id="chk-step-5" onchange="toggleStep(5)">
+              Mark Step 5 Done
+            </label>
+          </div>
+
+          <div class="step-details-grid">
+            <div class="step-block">
+              <div class="step-block-title">💻 1. Start Backend Gateway</div>
+              <div class="step-block-content">
+                In PowerShell terminal 1:
+                <div class="cmd-snippet-box">
+                  <span>&amp; ".venv\Scripts\python.exe" -m uvicorn src.main:app --reload --port 8000</span>
+                  <button class="copy-btn" onclick="copyCmd('&amp; \".venv\\Scripts\\python.exe\" -m uvicorn src.main:app --reload --port 8000', this)">Copy</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">💻 2. Start React Frontend</div>
+              <div class="step-block-content">
+                In PowerShell terminal 2:
+                <div class="cmd-snippet-box">
+                  <span>cd frontend; npm run dev</span>
+                  <button class="copy-btn" onclick="copyCmd('cd frontend; npm run dev', this)">Copy</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">🧪 3. Test Burst Throttling in Shell</div>
+              <div class="step-block-content">
+                Open <code>http://localhost:5173</code> to play with sliders, or test 12 rapid requests via PowerShell:
+                <div class="cmd-snippet-box">
+                  <span>1..12 | % { (Invoke-WebRequest "http://localhost:8000/").StatusCode }</span>
+                  <button class="copy-btn" onclick="copyCmd('1..12 | % { (Invoke-WebRequest \"http://localhost:8000/\").StatusCode }', this)">Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 6 -->
+        <div class="track-step-card" id="step-card-6">
+          <div class="track-step-top">
+            <div class="step-identity">
+              <div class="step-number-pill">06</div>
+              <div>
+                <div class="step-heading">
+                  Bridge to Phase 4: Redis for AI (Vector Search)
+                  <span class="bento-tag tag-amber" style="margin:0;">Next Milestone</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted);">
+                  How everything we built directly empowers Vector Search and Semantic Caching.
+                </div>
+              </div>
+            </div>
+            <label class="step-check-label">
+              <input type="checkbox" class="step-checkbox" id="chk-step-6" onchange="toggleStep(6)">
+              Mark Step 6 Done
+            </label>
+          </div>
+
+          <div class="step-details-grid">
+            <div class="step-block">
+              <div class="step-block-title">🎯 1. What's Next in the Course</div>
+              <div class="step-block-content">
+                You have completed Phases 1, 2, and 3. The next live module is:<br>
+                <strong>Module 11 · Vector Search</strong> in <a href="file:///E:/Coding/learning/redis/README.md" style="color: #93c5fd; font-family: monospace;">learning/redis/README.md</a>.
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">⚡ 2. How the Concepts Transfer</div>
+              <div class="step-block-content">
+                In <strong>Semantic Caching</strong> (Module 12), we reuse our exact <strong>MutexCache singleflight pattern</strong> from Step 3, but instead of exact key matching, we query Redis Vector Search with cosine similarity thresholds to cache LLM generations!
+              </div>
+            </div>
+
+            <div class="step-block">
+              <div class="step-block-title">🚀 3. Readiness Action</div>
+              <div class="step-block-content">
+                Whenever you're ready, tell your assistant: <em>"Let's start Module 11 Vector Search"</em>. We will construct index schemas, compare FLAT vs HNSW, and write hybrid filter queries!
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- ============================================================== -->
     <!-- SECTION 1: SYSTEM OVERVIEW & ARCHITECTURE MAP (BENTO) -->
     <!-- ============================================================== -->
-    <main id="sec-overview" class="tab-section active">
+    <main id="sec-overview" class="tab-section">
       <div class="bento-grid">
         
         <!-- Bento Card 1: End to End Flow (Large Span) -->
@@ -1314,10 +1878,11 @@ tokens = math.<span class="token-fn">min</span>(capacity, tokens + elapsed * ref
         target.classList.add('active');
         btn.classList.add('active');
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Dynamic Mouse Gradient for Bento Cards
-    document.querySelectorAll('.bento-card').forEach(card => {
+    document.querySelectorAll('.bento-card, .track-step-card').forEach(card => {
       card.addEventListener('mousemove', e => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -1326,6 +1891,87 @@ tokens = math.<span class="token-fn">min</span>(capacity, tokens + elapsed * ref
         card.style.setProperty('--mouse-y', `${y}px`);
       });
     });
+
+    // Guided Track Checklist & LocalStorage Persistence
+    const TOTAL_STEPS = 6;
+
+    function getTrackStorage() {
+      try {
+        return JSON.parse(localStorage.getItem('rate_limiter_track_progress') || '{}');
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveTrackStorage(data) {
+      try {
+        localStorage.setItem('rate_limiter_track_progress', JSON.stringify(data));
+      } catch (e) {}
+    }
+
+    function toggleStep(stepNum) {
+      const chk = document.getElementById(`chk-step-${stepNum}`);
+      const card = document.getElementById(`step-card-${stepNum}`);
+      const data = getTrackStorage();
+
+      if (chk.checked) {
+        data[stepNum] = true;
+        card.classList.add('completed');
+      } else {
+        delete data[stepNum];
+        card.classList.remove('completed');
+      }
+
+      saveTrackStorage(data);
+      updateTrackProgressUI();
+    }
+
+    function updateTrackProgressUI() {
+      const data = getTrackStorage();
+      let completed = 0;
+      for (let i = 1; i <= TOTAL_STEPS; i++) {
+        const chk = document.getElementById(`chk-step-${i}`);
+        const card = document.getElementById(`step-card-${i}`);
+        if (data[i]) {
+          completed++;
+          if (chk) chk.checked = true;
+          if (card) card.classList.add('completed');
+        } else {
+          if (chk) chk.checked = false;
+          if (card) card.classList.remove('completed');
+        }
+      }
+
+      const pct = Math.round((completed / TOTAL_STEPS) * 100);
+      const bar = document.getElementById('track-progress-bar');
+      const text = document.getElementById('track-completed-count');
+
+      if (bar) bar.style.width = pct + '%';
+      if (text) text.textContent = `${completed} / ${TOTAL_STEPS} Milestones Completed (${pct}%)`;
+    }
+
+    function resetTrackProgress() {
+      if (confirm('Reset all checklist milestones?')) {
+        saveTrackStorage({});
+        updateTrackProgressUI();
+      }
+    }
+
+    // Copy to clipboard helper
+    function copyCmd(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.color = '#34d399';
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.style.color = '';
+        }, 1800);
+      });
+    }
+
+    // Initialize track UI
+    updateTrackProgressUI();
 
     // File Matrix Filtering
     let currentCategory = 'all';
